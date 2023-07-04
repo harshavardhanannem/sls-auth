@@ -1,0 +1,41 @@
+{
+  "name": "projects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/credential-providers": "^3.363.0",
+    "@mongodb-js/zstd": "^1.1.0",
+    "aws4": "^1.12.0",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "kerberos": "^2.0.1",
+    "mongodb": "^5.6.0",
+    "mongodb-client-encryption": "^2.8.0",
+    "mongoose": "^7.3.1",
+    "node-cron": "^3.0.2",
+    "nvm": "0.0.4",
+    "serverless": "^3.33.0",
+    "serverless-http": "^3.2.0",
+    "serverless-middleware": "^3.1.0",
+    "serverless-offline": "^12.0.4",
+    "snappy": "^7.2.2",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "node-loader": "^2.0.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-plugin-aws-alerts": "^1.7.5",
+    "serverless-webpack": "^5.11.0",
+    "webpack": "^5.88.1"
+  }
+}

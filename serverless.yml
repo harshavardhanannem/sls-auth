@@ -1,0 +1,78 @@
+service: serverless-mongo
+frameworkVersion: "3"
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-middleware
+
+package:
+  individually: true
+
+custom:
+  middleware:
+    - src/middlewares/authenticationToken.js
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  memorySize: 128
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  httpApi:
+    cors: true
+
+functions:
+  createUser:
+    handler: src/handlers/createUser.handler
+    events:
+      - httpApi:
+          path: /users
+          method: POST
+
+  getUser:
+    handler: src/handlers/getUser.handler
+    events:
+      - httpApi:
+          path: /users/{email}
+          method: GET
+
+  getAll:
+    middleware:
+      - ${self:custom.middleware}
+    handler: src/handlers/setTrigger.updateUser
+    events:
+      - httpApi:
+          path: /users
+          method: GET
+
+  setTrigger:
+    handler: src/handlers/setTrigger.updateUser
+    events:
+      - httpApi:
+          path: /updateUser
+          method: GET
+      - schedule: cron(56 13 * * ? *)
+
+  login:
+    handler: src/handlers/login.handler
+    events:
+      - http:
+          path: /login
+          method: post
+          cors: true
+
+  updateUser:
+    handler: src/handlers/updateUser.handler
+    events:
+      - httpApi:
+          path: /users/{userId}
+          method: PUT
+
+  deleteUser:
+    handler: src/handlers/deleteUser.handler
+    events:
+      - http:
+          path: users/{userId}
+          method: delete
+          cors: true
